@@ -3,27 +3,35 @@ package com.example.dialogs_android
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.DatePicker
+import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.dialogs_android.databinding.ActivityMainBinding
 import com.example.dialogs_android.databinding.ItemDialogBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    private val TAG = "news"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Log.d(TAG, "onCreate: ")
         binding.timeDialog.setOnClickListener {
             val calendar = Calendar.getInstance()
             val timePickerDialog = TimePickerDialog(
@@ -123,5 +131,58 @@ class MainActivity : AppCompatActivity() {
 
             alertDialog.show()
         }
+        binding.bottomSheet.setOnClickListener {
+            val bottomSheetDialog = BottomSheetDialog(this)
+            val bottomSheetVew =
+                LayoutInflater.from(this).inflate(R.layout.item_dialog, binding.root, false)
+            bottomSheetDialog.setContentView(bottomSheetVew)
+            bottomSheetDialog.show()
+            val bind = ItemDialogBinding.bind(bottomSheetVew)
+            bind.btn.setOnClickListener {
+                val name = bind.etName.text.toString()
+                val number = bind.etNumber.text.toString()
+
+                Log.d("AAA", "onCreate: $name $number")
+                bottomSheetDialog.dismiss()
+            }
+        }
+        binding.snackBar.setOnClickListener {
+            val snackbar = Snackbar.make(
+                it, "remove chats",
+                Snackbar.LENGTH_LONG
+            ).setAction("Undo") {
+                Log.d("AAA", "onCreate: Clicked")
+            }
+            snackbar.show()
+        }
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart: ")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
     }
 }

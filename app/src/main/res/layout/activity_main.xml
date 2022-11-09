@@ -37,4 +37,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="time picker dialog" />
+
+    <Button
+        android:id="@+id/bottom_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bottom sheet" />
+
+    <Button
+        android:id="@+id/snack_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="snack bar" />
+
+    <Button
+        android:id="@+id/next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="next" />
 </LinearLayout>
